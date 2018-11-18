@@ -1,7 +1,6 @@
 'use strict';
 
 var renderStatistics = function(ctx,names, times) {
-  var canvas = document.querySelector('#canvas-stat');
   var CLOUD_WIDTH = 420;//Ширина облака статистики
   var CLOUD_HEIGH = 270;//Высота облака статистики
   var MAX_HEIGHT_BAR = 150; //Максимальная высота столбцов
