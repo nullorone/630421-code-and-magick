@@ -62,7 +62,7 @@ var renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'rgb(0, 0,' + blueColorSaturation + ')';
 
       // Если имя игрока 'Вы' - отрисовка столбца красным цветом
-      if (names[i] == 'Вы') {
+      if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       }
 
