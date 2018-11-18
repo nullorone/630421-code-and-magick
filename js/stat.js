@@ -30,7 +30,7 @@ var renderStatistics = function (ctx, names, times) {
   };
 
   // Находит максимальное значение в массиве времени прохождения игроков
-  var getMaxTimes = function (times) {
+  var getMaxTimes = function () {
     var maxElement = times[0];
     for (var i = 0; i < times.length; i++) {
       if (maxElement < times[i]) {
@@ -40,7 +40,7 @@ var renderStatistics = function (ctx, names, times) {
     return maxElement;
   };
 
-  var maxTime = getMaxTimes(times); // Записывает максимальное значение массива в переменную
+  var maxTime = getMaxTimes(); // Записывает максимальное значение массива в переменную
 
   // Проверка поддержки браузером canvas
   if (ctx) {
