@@ -53,7 +53,7 @@ window.renderStatistics = function (ctx, names, times) {
         RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
         PLAYER_NAME_POSITION_Y
     ); // Отрисовка имени игрока. На каждой итерации смещает начальную позицию на 90px по-горизонтали
-    ctx.fillStyle = 'rgb(0, 0,' + blueColorSaturation + ')';
+    ctx.fillStyle = 'hsl(240,' + blueColorSaturation + '%, 47%)';
 
     // Если имя игрока 'Вы' - отрисовка столбца красным цветом
     if (names[i] === 'Вы') {
