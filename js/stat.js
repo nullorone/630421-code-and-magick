@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Отрисовываем имя и столбец каждого игрока
   for (var i = 0; i < names.length; i++) {
-    var blueColorSaturation = Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
+    var ColorSaturation = Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
     var heightBarPlayer = (MAX_HEIGHT_BAR * times[i]) / maxTime; // Записывает расчет высоты столбца игрока согласно пропорции к максимальной высоте столбцов
     var textTimesPositionY = MAX_HEIGHT_BAR - heightBarPlayer - 10; // Положение по-вертикали текста с результатом игрока
 
@@ -53,7 +53,7 @@ window.renderStatistics = function (ctx, names, times) {
         RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
         PLAYER_NAME_POSITION_Y
     ); // Отрисовка имени игрока. На каждой итерации смещает начальную позицию на 90px по-горизонтали
-    ctx.fillStyle = 'hsl(240,' + blueColorSaturation + '%, 47%)';
+    ctx.fillStyle = 'hsl(240,' + ColorSaturation + '%, 47%)';
 
     // Если имя игрока 'Вы' - отрисовка столбца красным цветом
     if (names[i] === 'Вы') {
