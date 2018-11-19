@@ -39,34 +39,44 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxTimes(); // Записывает максимальное значение массива в переменную
 
-  // Проверка поддержки браузером canvas
-  if (ctx) {
-    fieldStat(); // Отрисовываем поле статистики
-    textInsetStat(); // Отрисовываем текст в поле статистики
+  fieldStat(); // Отрисовываем поле статистики
+  textInsetStat(); // Отрисовываем текст в поле статистики
 
-    // Отрисовываем имя и столбец каждого игрока
-    for (var i = 0; i < names.length; i++) {
-      var blueColorSaturation = 255 - Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
-      var heightBarPlayer = (MAX_HEIGHT_BAR * times[i]) / maxTime; // Записывает расчет высоты столбца игрока согласно пропорции к максимальной высоте столбцов
-      var textTimesPositionY = MAX_HEIGHT_BAR - heightBarPlayer - 10; // Положение по-вертикали текста с результатом игрока
+  // Отрисовываем имя и столбец каждого игрока
+  for (var i = 0; i < names.length; i++) {
+    var blueColorSaturation = 255 - Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
+    var heightBarPlayer = (MAX_HEIGHT_BAR * times[i]) / maxTime; // Записывает расчет высоты столбца игрока согласно пропорции к максимальной высоте столбцов
+    var textTimesPositionY = MAX_HEIGHT_BAR - heightBarPlayer - 10; // Положение по-вертикали текста с результатом игрока
 
-      ctx.fillText(
-          names[i],
-          RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
-          PLAYER_NAME_POSITION_Y
-      ); // Отрисовка имени игрока. На каждой итерации смещает начальную позицию на 90px по-горизонтали
-      ctx.fillStyle = 'rgb(0, 0,' + blueColorSaturation + ')';
+    ctx.fillText(
+        names[i],
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_NAME_POSITION_Y
+    ); // Отрисовка имени игрока. На каждой итерации смещает начальную позицию на 90px по-горизонтали
+    ctx.fillStyle = 'rgb(0, 0,' + blueColorSaturation + ')';
 
-      // Если имя игрока 'Вы' - отрисовка столбца красным цветом
-      if (names[i] === 'Вы') {
-        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      }
-      ctx.fillRect(RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR), PLAYER_BAR_POSITION_Y, WIDTH_BAR, MAX_HEIGHT_BAR);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR), PLAYER_BAR_POSITION_Y, WIDTH_BAR, MAX_HEIGHT_BAR - heightBarPlayer);
-      ctx.fillStyle = '#000000';
-      ctx.fillText(Math.floor(times[i]), RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR), PLAYER_BAR_POSITION_Y + textTimesPositionY); // Отрисовывает результат игрока с заданным положением относительно столбца
+    // Если имя игрока 'Вы' - отрисовка столбца красным цветом
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
+    ctx.fillRect(
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_BAR_POSITION_Y,
+        WIDTH_BAR,
+        MAX_HEIGHT_BAR
+    );
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_BAR_POSITION_Y,
+        WIDTH_BAR,
+        MAX_HEIGHT_BAR - heightBarPlayer
+    );
+    ctx.fillStyle = '#000000';
+    ctx.fillText(
+        Math.floor(times[i]),
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_BAR_POSITION_Y + textTimesPositionY
+    ); // Отрисовывает результат игрока с заданным положением относительно столбца
   }
 };
-
