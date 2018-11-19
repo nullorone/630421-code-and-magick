@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Отрисовываем имя и столбец каждого игрока
   for (var i = 0; i < names.length; i++) {
-    var blueColorSaturation = 255 - Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
+    var blueColorSaturation = Math.floor(Math.random() * 100); // Рандомное значение насыщенности при каждой итерации
     var heightBarPlayer = (MAX_HEIGHT_BAR * times[i]) / maxTime; // Записывает расчет высоты столбца игрока согласно пропорции к максимальной высоте столбцов
     var textTimesPositionY = MAX_HEIGHT_BAR - heightBarPlayer - 10; // Положение по-вертикали текста с результатом игрока
 
