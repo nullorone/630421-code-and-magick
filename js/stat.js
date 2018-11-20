@@ -49,9 +49,9 @@ window.renderStatistics = function (ctx, names, times) {
     var textTimesPositionY = MAX_HEIGHT_BAR - heightBarPlayer - 10; // Положение по-вертикали текста с результатом игрока
 
     ctx.fillText(
-      names[i],
-      RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
-      PLAYER_NAME_POSITION_Y
+        names[i],
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_NAME_POSITION_Y
     ); // Отрисовка имени игрока. На каждой итерации смещает начальную позицию на 90px по-горизонтали
     ctx.fillStyle = 'hsl(240,' + ColorSaturation + '%, 47%)';
 
@@ -60,16 +60,16 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
     ctx.fillRect(
-      RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
-      PLAYER_BAR_POSITION_Y + MAX_HEIGHT_BAR - heightBarPlayer,
-      WIDTH_BAR,
-      heightBarPlayer
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_BAR_POSITION_Y + MAX_HEIGHT_BAR - heightBarPlayer,
+        WIDTH_BAR,
+        heightBarPlayer
     );
     ctx.fillStyle = '#000000';
     ctx.fillText(
-      Math.floor(times[i]),
-      RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
-      PLAYER_BAR_POSITION_Y + textTimesPositionY
+        Math.floor(times[i]),
+        RESULT_POSITION_X + i * (GAP_BAR + WIDTH_BAR),
+        PLAYER_BAR_POSITION_Y + textTimesPositionY
     ); // Отрисовывает результат игрока с заданным положением относительно столбца
   }
 };
