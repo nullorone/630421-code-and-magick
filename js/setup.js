@@ -49,13 +49,13 @@ var getWizards = function () {
   for (var i = 0; i < WIZARDS_NUMBER; i++) {
     var wizardTemplate = {
       'name':
-        WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length - 1)] +
+        WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length)] +
         ' ' +
-        WIZARD_SURNAME[getRandomInt(0, WIZARD_SURNAME.length - 1)],
+        WIZARD_SURNAME[getRandomInt(0, WIZARD_SURNAME.length)],
       'coatColor':
-        WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length - 1)],
+        WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length)],
       'eyesColor':
-        WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length - 1)]
+        WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length)]
     };
     wizards.push(wizardTemplate);
   }
