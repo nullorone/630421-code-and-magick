@@ -37,7 +37,7 @@ var WIZARDS_NUMBER = 4;
 
 // Находим случайное число в указанных диапазонах
 var getRandomInt = function (min, max) {
-  var randomInteger = Math.floor(Math.random() * (max + 1 - min) + min);
+  var randomInteger = Math.floor(Math.random() * (max - min) + min);
   return randomInteger;
 };
 
@@ -48,40 +48,40 @@ var getWizards = function () {
   var wizards = [];
   for (var i = 0; i < WIZARDS_NUMBER; i++) {
     var wizardTemplate = {
-      'name': WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length - 1)] +
+      'name':
+        WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length - 1)] +
         ' ' +
         WIZARD_SURNAME[getRandomInt(0, WIZARD_SURNAME.length - 1)],
-      'coatColor': WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length - 1)],
-      'eyesColor': WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length - 1)]
+      'coatColor':
+        WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length - 1)],
+      'eyesColor':
+        WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length - 1)]
     };
     wizards.push(wizardTemplate);
   }
   return wizards;
 };
 
-var wizards = getWizards();
-
-var getSimilarWizards = function (wizardsElements) {
+var getSimilarWizards = function (wizards) {
   var fragment = document.createDocumentFragment();
   var wizardsList = document.querySelector('.setup-similar-list');
   var wizardTemplate = document
     .querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
-  for (var i = 0; i < wizardsElements.length; i++) {
+    .content.querySelector('.setup-similar-item');
+  for (var i = 0; i < wizards.length; i++) {
     var wizardElement = wizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent =
-      wizardsElements[i].name;
+      wizards[i].name;
     wizardElement.querySelector('.wizard-coat').style.fill =
-      wizardsElements[i].coatColor;
+      wizards[i].coatColor;
     wizardElement.querySelector('.wizard-eyes').style.fill =
-      wizardsElements[i].eyesColor;
+      wizards[i].eyesColor;
     fragment.appendChild(wizardElement);
   }
   return wizardsList.appendChild(fragment);
 };
 
-getSimilarWizards(wizards);
+getSimilarWizards(getWizards());
 
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
