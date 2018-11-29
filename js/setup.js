@@ -49,7 +49,7 @@ var getRandomInt = function (min, max) {
 };
 
 var togglePlayerMenu = function () {
-  setupContainer.classList.toggle('hidden');
+  setupContainer.classList.remove('hidden');
 };
 
 var getWizards = function () {
