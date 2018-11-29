@@ -100,6 +100,7 @@ var onUserIconClick = playerMenu.addEventListener('click', togglePlayerMenu);
 // Скрываем меню игрока при клике на кнопку закрытия меню игрока
 var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', togglePlayerMenu);
 
+// Открывает меню игрока при фокусе на иконку игрока и нажатии Enter
 var getPlayerMenu = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     setupContainer.classList.remove('hidden');
