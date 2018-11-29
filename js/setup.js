@@ -52,6 +52,10 @@ var showPlayerMenu = function () {
   setupContainer.classList.remove('hidden');
 };
 
+var hidePlayerMenu = function () {
+  setupContainer.classList.add('hidden');
+};
+
 var getWizards = function () {
   var wizards = [];
   for (var i = 0; i < WIZARDS_NUMBER; i++) {
@@ -98,7 +102,7 @@ var buttonClosePlayerMenu = setupContainer.querySelector('.setup-close');
 var onUserIconClick = playerMenu.addEventListener('click', showPlayerMenu);
 
 // Скрываем меню игрока при клике на кнопку закрытия меню игрока
-var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', showPlayerMenu);
+var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', hidePlayerMenu);
 
 // Открывает меню игрока при фокусе на иконку игрока и нажатии Enter
 var showPlayerMenuKeydown = function (evt) {
