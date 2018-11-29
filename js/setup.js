@@ -35,7 +35,7 @@ var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var WIZARDS_NUMBER = 4;
 
-var playerMenu = document.querySelector('.setup-open');
+var playerMenu = document.querySelector('.setup-open-icon');
 var setupContainer = document.querySelector('.setup');
 
 // Находим случайное число в указанных диапазонах
