@@ -50,7 +50,7 @@ var getRandomInt = function (min, max) {
 
 var showPlayerMenu = function () {
   setupContainer.classList.remove('hidden');
-  document.removeEventListener('keydown', showPlayerMenuKeydown);
+  document.addEventListener('keydown', hidePlayerMenuKeydown);
 };
 
 var hidePlayerMenu = function () {
@@ -122,6 +122,4 @@ var hidePlayerMenuKeydown = function (evt) {
 
 // Показываем меню игрока при фокусе на иконке игрока и нажатии Enter
 var onUserIconKeydown = playerMenu.addEventListener('keydown', showPlayerMenuKeydown);
-
-var onPopupPlayerMenuKeydown = playerMenu.addEventListener('keydown', hidePlayerMenuKeydown);
 
