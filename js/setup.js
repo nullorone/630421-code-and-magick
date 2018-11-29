@@ -35,6 +35,10 @@ var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var WIZARDS_NUMBER = 4;
 
+var ENTER_KEYCODE = 13;
+
+var ESC_KEYCODE = 27;
+
 var playerMenu = document.querySelector('.setup-open-icon');
 var setupContainer = document.querySelector('.setup');
 
@@ -95,3 +99,22 @@ var onUserIconClick = playerMenu.addEventListener('click', showPlayerMenu);
 
 // Скрываем меню игрока при клике на кнопку закрытия меню игрока
 var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', showPlayerMenu);
+
+var getPlayerMenu = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    setupContainer.classList.remove('hidden');
+  }
+};
+
+// Добавляет класс hidden если был нажат Esc
+var hidePlayerMenu = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    setupContainer.classList.add('hidden');
+  }
+};
+
+// Показываем меню игрока при фокусе на иконке игрока и нажатии Enter
+var onUserIconKeydown = playerMenu.addEventListener('keydown', getPlayerMenu);
+
+var onPopupPlayerMenuKeydown = document.addEventListener('keydown', hidePlayerMenu);
+
