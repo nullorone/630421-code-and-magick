@@ -101,21 +101,21 @@ var onUserIconClick = playerMenu.addEventListener('click', showPlayerMenu);
 var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', showPlayerMenu);
 
 // Открывает меню игрока при фокусе на иконку игрока и нажатии Enter
-var getPlayerMenu = function (evt) {
+var showPlayerMenuKeydown = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     setupContainer.classList.remove('hidden');
   }
 };
 
 // Добавляет класс hidden если был нажат Esc
-var hidePlayerMenu = function (evt) {
+var hidePlayerMenuKeydown = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     setupContainer.classList.add('hidden');
   }
 };
 
 // Показываем меню игрока при фокусе на иконке игрока и нажатии Enter
-var onUserIconKeydown = playerMenu.addEventListener('keydown', getPlayerMenu);
+var onUserIconKeydown = playerMenu.addEventListener('keydown', showPlayerMenuKeydown);
 
-var onPopupPlayerMenuKeydown = document.addEventListener('keydown', hidePlayerMenu);
+var onPopupPlayerMenuKeydown = document.addEventListener('keydown', hidePlayerMenuKeydown);
 
