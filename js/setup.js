@@ -50,10 +50,12 @@ var getRandomInt = function (min, max) {
 
 var showPlayerMenu = function () {
   setupContainer.classList.remove('hidden');
+  document.removeEventListener('keydown', showPlayerMenuKeydown);
 };
 
 var hidePlayerMenu = function () {
   setupContainer.classList.add('hidden');
+  document.removeEventListener('keydown', hidePlayerMenuKeydown);
 };
 
 var getWizards = function () {
@@ -107,19 +109,19 @@ var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', hidePla
 // Открывает меню игрока при фокусе на иконку игрока и нажатии Enter
 var showPlayerMenuKeydown = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    setupContainer.classList.remove('hidden');
+    showPlayerMenu();
   }
 };
 
 // Добавляет класс hidden если был нажат Esc
 var hidePlayerMenuKeydown = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    setupContainer.classList.add('hidden');
+    hidePlayerMenu();
   }
 };
 
 // Показываем меню игрока при фокусе на иконке игрока и нажатии Enter
 var onUserIconKeydown = playerMenu.addEventListener('keydown', showPlayerMenuKeydown);
 
-var onPopupPlayerMenuKeydown = document.addEventListener('keydown', hidePlayerMenuKeydown);
+var onPopupPlayerMenuKeydown = playerMenu.addEventListener('keydown', hidePlayerMenuKeydown);
 
