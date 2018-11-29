@@ -48,7 +48,7 @@ var getRandomInt = function (min, max) {
   return randomInteger;
 };
 
-var togglePlayerMenu = function () {
+var showPlayerMenu = function () {
   setupContainer.classList.remove('hidden');
 };
 
@@ -95,10 +95,10 @@ setupSimilar.classList.remove('hidden');
 var buttonClosePlayerMenu = setupContainer.querySelector('.setup-close');
 
 // Показываем меню игрока при клике на иконку игрока
-var onUserIconClick = playerMenu.addEventListener('click', togglePlayerMenu);
+var onUserIconClick = playerMenu.addEventListener('click', showPlayerMenu);
 
 // Скрываем меню игрока при клике на кнопку закрытия меню игрока
-var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', togglePlayerMenu);
+var onButtonCloseClick = buttonClosePlayerMenu.addEventListener('click', showPlayerMenu);
 
 // Открывает меню игрока при фокусе на иконку игрока и нажатии Enter
 var getPlayerMenu = function (evt) {
