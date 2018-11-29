@@ -35,27 +35,28 @@ var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var WIZARDS_NUMBER = 4;
 
+var playerMenu = document.querySelector('.setup-open');
+var setupContainer = document.querySelector('.setup');
+
 // Находим случайное число в указанных диапазонах
 var getRandomInt = function (min, max) {
   var randomInteger = Math.floor(Math.random() * (max - min) + min);
   return randomInteger;
 };
 
-var setupContainer = document.querySelector('.setup');
-setupContainer.classList.remove('hidden');
+var showPlayerMenu = function () {
+  setupContainer.classList.toggle('hidden');
+};
 
 var getWizards = function () {
   var wizards = [];
   for (var i = 0; i < WIZARDS_NUMBER; i++) {
     var wizardTemplate = {
-      'name':
-        WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length)] +
+      'name': WIZARD_NAME[getRandomInt(0, WIZARD_NAME.length)] +
         ' ' +
         WIZARD_SURNAME[getRandomInt(0, WIZARD_SURNAME.length)],
-      'coatColor':
-        WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length)],
-      'eyesColor':
-        WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length)]
+      'coatColor': WIZARD_COAT_COLOR[getRandomInt(0, WIZARD_COAT_COLOR.length)],
+      'eyesColor': WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length)]
     };
     wizards.push(wizardTemplate);
   }
@@ -85,3 +86,12 @@ getSimilarWizards(getWizards());
 
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
+
+// Иконка закрытия меню игрока
+var buttonClosePlayerMenu = setupContainer.querySelector('.setup-close');
+
+// Показываем меню игрока при клике на иконку игрока
+playerMenu.addEventListener('click', showPlayerMenu);
+
+// Скрываем меню игрока при клике на кнопку закрытия меню игрока
+buttonClosePlayerMenu.addEventListener('click', showPlayerMenu);
