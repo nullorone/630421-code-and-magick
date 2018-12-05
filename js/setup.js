@@ -107,7 +107,7 @@ var inputPlayerName = setupContainer.querySelector('.setup-user-name');
 var buttonClosePlayerSettings = setupContainer.querySelector('.setup-close');
 
 // Кнопка отправки настроек игрока на сервер
-var btnSubmintPlayerSettings = setupContainer.querySelector('.setup-submit');
+var buttonSubmitPlayerSettings = setupContainer.querySelector('.setup-submit');
 
 // Форма с настройками персонажа игрока
 var formPlayerSettings = document.querySelector('.setup-wizard-form');
@@ -186,7 +186,7 @@ inputPlayerName.addEventListener('blur', function () {
 buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
 
 // Отправляет форму при нажатии Enter на кнопке Сохранить
-btnSubmintPlayerSettings.addEventListener('keydown', onButtonSubmitEnterKeydown);
+buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitEnterKeydown);
 
 // Описание функционала измененния вида персонажа игрока
 
