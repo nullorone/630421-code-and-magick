@@ -122,12 +122,6 @@ var addEscKeydownPlayerSettings = function () {
   document.addEventListener('keydown', onEscHidePlayerSettings);
 };
 
-// Функция отображения формы с настройками игрока
-var showPlayerSettings = function () {
-  setupContainer.classList.remove('hidden');
-  addEscKeydownPlayerSettings();
-};
-
 // Функция скрытия формы с настройками игрока
 var hidePlayerSettings = function () {
   setupContainer.classList.add('hidden');
@@ -163,27 +157,6 @@ var onButtonSubmitEnterKeydown = function (evt) {
   }
 };
 
-// Показываем настройки игрока при клике на иконку игрока
-playerSettings.addEventListener('click', showPlayerSettings);
-
-// Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
-buttonClosePlayerSettings.addEventListener('click', hidePlayerSettings);
-
-// Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
-playerSettings.addEventListener('keydown', onEnterShowPlayerSettings);
-
-// Отменяет закрытие окна с настройками игрока при фокусе на инпуте с именем игрока
-inputPlayerName.addEventListener('focus', removeEscKeydownPlayerSettings);
-
-// Возвращает возможность закрытия окна по Esc, когда фокус уйдет с input
-inputPlayerName.addEventListener('blur', addEscKeydownPlayerSettings);
-
-// Закрывает окно при нажатии Enter на иконке закрытия окна
-buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
-
-// Отправляет форму при нажатии Enter на кнопке Сохранить
-buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitEnterKeydown);
-
 // Описание функционала измененния вида персонажа игрока
 
 // Мантия персонажа игрока
@@ -210,15 +183,11 @@ var onWizardCoatClick = function () {
   inputWizardCoat.value = newWizardCoatColor;
 };
 
-wizardCoat.addEventListener('click', onWizardCoatClick);
-
 // Меняет цвет глаз при клике на глаза персонажа игрока
 var onWizardEyesClick = function () {
   var newWizardEyesColor = wizardEyes.style.fill = WIZARD_EYES_COLOR[getRandomInt(0, WIZARD_EYES_COLOR.length - 1)];
   inputWizardEyes.value = newWizardEyesColor;
 };
-
-wizardEyes.addEventListener('click', onWizardEyesClick);
 
 // Меняет цвет фаербола при клике на фаербол персонажа игрока
 var onWizardFireballClick = function () {
@@ -226,4 +195,30 @@ var onWizardFireballClick = function () {
   inputWizardFireball.value = newWizardFireballColor;
 };
 
-wizardFireball.addEventListener('click', onWizardFireballClick);
+// Функция отображения формы с настройками игрока
+var showPlayerSettings = function () {
+  setupContainer.classList.remove('hidden');
+  addEscKeydownPlayerSettings();
+  // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
+  buttonClosePlayerSettings.addEventListener('click', hidePlayerSettings);
+  // Закрывает окно при нажатии Enter на иконке закрытия окна
+  buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
+  // Отправляет форму при нажатии Enter на кнопке Сохранить
+  buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitEnterKeydown);
+  // Отменяет закрытие окна с настройками игрока при фокусе на инпуте с именем игрока
+  inputPlayerName.addEventListener('focus', removeEscKeydownPlayerSettings);
+  // Возвращает возможность закрытия окна по Esc, когда фокус уйдет с input
+  inputPlayerName.addEventListener('blur', addEscKeydownPlayerSettings);
+  // При клике на глаза волшебника, меняется цвет глаз
+  wizardEyes.addEventListener('click', onWizardEyesClick);
+  // При клике на мантию, меняется цвет мантии
+  wizardCoat.addEventListener('click', onWizardCoatClick);
+  // При клике на фаербол, меняется цвет фаербола
+  wizardFireball.addEventListener('click', onWizardFireballClick);
+};
+
+// Показываем настройки игрока при клике на иконку игрока
+playerSettings.addEventListener('click', showPlayerSettings);
+
+// Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
+playerSettings.addEventListener('keydown', onEnterShowPlayerSettings);
