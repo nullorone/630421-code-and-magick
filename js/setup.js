@@ -173,14 +173,10 @@ buttonClosePlayerSettings.addEventListener('click', hidePlayerSettings);
 playerSettings.addEventListener('keydown', onEnterShowPlayerSettings);
 
 // Отменяет закрытие окна с настройками игрока при фокусе на инпуте с именем игрока
-inputPlayerName.addEventListener('focus', function () {
-  removeEscKeydownPlayerSettings();
-});
+inputPlayerName.addEventListener('focus', removeEscKeydownPlayerSettings);
 
 // Возвращает возможность закрытия окна по Esc, когда фокус уйдет с input
-inputPlayerName.addEventListener('blur', function () {
-  addEscKeydownPlayerSettings();
-});
+inputPlayerName.addEventListener('blur', addEscKeydownPlayerSettings);
 
 // Закрывает окно при нажатии Enter на иконке закрытия окна
 buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
