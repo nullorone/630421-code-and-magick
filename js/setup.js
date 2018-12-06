@@ -123,29 +123,29 @@ var onEscKeydownAddPlayerSettings = function () {
 };
 
 // Функция скрытия формы с настройками игрока
-var onPlayerSettingsHide = function () {
+var hidePlayerSettings = function () {
   setupContainer.classList.add('hidden');
-  onEscKeydownRemovePlayerSettings();
+  document.removeEventListener('keydown', onEscHidePlayerSettings);
 };
 
 // Открывает настройками игрока при фокусе на иконку игрока и нажатии Enter
 var onEnterShowPlayerSettings = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    onPlayerSettingsShow();
+    showPlayerSettings();
   }
 };
 
 // Скрывает настройками игрока при фокусе на иконку игрока и нажатии Enter
 var onEnterHidePlayerSettings = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    onPlayerSettingsHide();
+    hidePlayerSettings();
   }
 };
 
 // Добавляет класс hidden если был нажат Esc
 var onEscHidePlayerSettings = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    onPlayerSettingsHide();
+    hidePlayerSettings();
   }
 };
 
@@ -196,11 +196,11 @@ var onWizardFireballClick = function () {
 };
 
 // Функция отображения формы с настройками игрока
-var onPlayerSettingsShow = function () {
+var showPlayerSettings = function () {
   setupContainer.classList.remove('hidden');
-  onEscKeydownAddPlayerSettings();
+  document.addEventListener('keydown', onEscHidePlayerSettings);
   // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
-  buttonClosePlayerSettings.addEventListener('click', onPlayerSettingsHide);
+  buttonClosePlayerSettings.addEventListener('click', hidePlayerSettings);
   // Закрывает окно при нажатии Enter на иконке закрытия окна
   buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
   // Отправляет форму при нажатии Enter на кнопке Сохранить
@@ -218,7 +218,7 @@ var onPlayerSettingsShow = function () {
 };
 
 // Показываем настройки игрока при клике на иконку игрока
-playerSettings.addEventListener('click', onPlayerSettingsShow);
+playerSettings.addEventListener('click', showPlayerSettings);
 
 // Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
 playerSettings.addEventListener('keydown', onEnterShowPlayerSettings);
