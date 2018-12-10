@@ -113,44 +113,48 @@ var buttonSubmitPlayerSettings = setupContainer.querySelector('.setup-submit');
 var formPlayerSettings = document.querySelector('.setup-wizard-form');
 
 // Удаляет обработчик события скрытия окна по нажатию Esc
-var onEscKeydownRemovePlayerSettings = function () {
-  document.removeEventListener('keydown', onEscHidePlayerSettings);
+var onInputNameFocus = function () {
+  document.removeEventListener('keydown', onDocumentKeydownEsc);
 };
 
 // Добавляет обработчик события скрытия окна по нажатию Esc
-var onEscKeydownAddPlayerSettings = function () {
-  document.addEventListener('keydown', onEscHidePlayerSettings);
+var onPlayerSettingsKeydownEsc = function () {
+  document.addEventListener('keydown', onDocumentKeydownEsc);
 };
 
 // Функция скрытия формы с настройками игрока
 var hidePlayerSettings = function () {
   setupContainer.classList.add('hidden');
-  document.removeEventListener('keydown', onEscHidePlayerSettings);
+  document.removeEventListener('keydown', onDocumentKeydownEsc);
+};
+
+var onButtonCloseClick = function () {
+  hidePlayerSettings();
 };
 
 // Открывает настройками игрока при фокусе на иконку игрока и нажатии Enter
-var onEnterShowPlayerSettings = function (evt) {
+var onIconPlayerKeydownEnter = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     showPlayerSettings();
   }
 };
 
 // Скрывает настройками игрока при фокусе на иконку игрока и нажатии Enter
-var onEnterHidePlayerSettings = function (evt) {
+var onButtonCLoseKeydownEnter = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     hidePlayerSettings();
   }
 };
 
 // Добавляет класс hidden если был нажат Esc
-var onEscHidePlayerSettings = function (evt) {
+var onDocumentKeydownEsc = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     hidePlayerSettings();
   }
 };
 
 // Отправляет настройки игрока на сервер по нажатию на Enter
-var onButtonSubmitEnterKeydown = function (evt) {
+var onButtonSubmitKeydownEnter = function (evt) {
   // evt.preventDefault();
   if (evt.keyCode === ENTER_KEYCODE) {
     formPlayerSettings.submit();
@@ -198,17 +202,17 @@ var onWizardFireballClick = function () {
 // Функция отображения формы с настройками игрока
 var showPlayerSettings = function () {
   setupContainer.classList.remove('hidden');
-  document.addEventListener('keydown', onEscHidePlayerSettings);
+  document.addEventListener('keydown', onDocumentKeydownEsc);
   // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
-  buttonClosePlayerSettings.addEventListener('click', hidePlayerSettings);
+  buttonClosePlayerSettings.addEventListener('click', onButtonCloseClick);
   // Закрывает окно при нажатии Enter на иконке закрытия окна
-  buttonClosePlayerSettings.addEventListener('keydown', onEnterHidePlayerSettings);
+  buttonClosePlayerSettings.addEventListener('keydown', onButtonCLoseKeydownEnter);
   // Отправляет форму при нажатии Enter на кнопке Сохранить
-  buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitEnterKeydown);
+  buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitKeydownEnter);
   // Отменяет закрытие окна с настройками игрока при фокусе на инпуте с именем игрока
-  inputPlayerName.addEventListener('focus', onEscKeydownRemovePlayerSettings);
+  inputPlayerName.addEventListener('focus', onInputNameFocus);
   // Возвращает возможность закрытия окна по Esc, когда фокус уйдет с input
-  inputPlayerName.addEventListener('blur', onEscKeydownAddPlayerSettings);
+  inputPlayerName.addEventListener('blur', onPlayerSettingsKeydownEsc);
   // При клике на глаза волшебника, меняется цвет глаз
   wizardEyes.addEventListener('click', onWizardEyesClick);
   // При клике на мантию, меняется цвет мантии
@@ -217,8 +221,13 @@ var showPlayerSettings = function () {
   wizardFireball.addEventListener('click', onWizardFireballClick);
 };
 
+// При клике на иконку игрока, открывается окно настроек игрока
+var onIconPlayerCLick = function () {
+  showPlayerSettings();
+};
+
 // Показываем настройки игрока при клике на иконку игрока
-playerSettings.addEventListener('click', showPlayerSettings);
+playerSettings.addEventListener('click', onIconPlayerCLick);
 
 // Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
-playerSettings.addEventListener('keydown', onEnterShowPlayerSettings);
+playerSettings.addEventListener('keydown', onIconPlayerKeydownEnter);
