@@ -13,17 +13,17 @@ var onUserAvatarMousedown = function (evt) {
 
   var dragged = false;
 
-  var onUserAvatarMousemove = function (mouseEvt) {
-    mouseEvt.preventDefault();
+  var onUserAvatarMousemove = function (mousemoveEvt) {
+    mousemoveEvt.preventDefault();
     dragged = true;
     var newPosition = {
-      x: mouseEvt.clientX - defaultPosition.x,
-      y: mouseEvt.clientY - defaultPosition.y
+      x: mousemoveEvt.clientX - defaultPosition.x,
+      y: mousemoveEvt.clientY - defaultPosition.y
     };
 
     defaultPosition = {
-      x: mouseEvt.clientX,
-      y: mouseEvt.clientY
+      x: mousemoveEvt.clientX,
+      y: mousemoveEvt.clientY
     };
 
     setupContainer.style.top = (setupContainer.offsetTop + newPosition.y) + 'px';
