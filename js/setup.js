@@ -112,6 +112,12 @@ var buttonSubmitPlayerSettings = setupContainer.querySelector('.setup-submit');
 // Форма с настройками персонажа игрока
 var formPlayerSettings = document.querySelector('.setup-wizard-form');
 
+// Изначальные координаты окна с настройками игрока относительно страницы
+var setupContainerPosition = {
+  x: setupContainer.offsetLeft,
+  y: setupContainer.offsetTop
+};
+
 // Удаляет обработчик события скрытия окна по нажатию Esc
 var onInputNameFocus = function () {
   document.removeEventListener('keydown', onDocumentKeydownEsc);
@@ -125,6 +131,8 @@ var onPlayerSettingsKeydownEsc = function () {
 // Функция скрытия формы с настройками игрока
 var hidePlayerSettings = function () {
   setupContainer.classList.add('hidden');
+  setupContainer.style.top = setupContainerPosition.y + 'px';
+  setupContainer.style.left = setupContainerPosition.x + 'px';
   document.removeEventListener('keydown', onDocumentKeydownEsc);
 };
 
@@ -224,6 +232,8 @@ var showPlayerSettings = function () {
 // При клике на иконку игрока, открывается окно настроек игрока
 var onIconPlayerCLick = function () {
   showPlayerSettings();
+  setupContainerPosition.x = setupContainer.offsetLeft;
+  setupContainerPosition.y = setupContainer.offsetTop;
 };
 
 // Показываем настройки игрока при клике на иконку игрока
