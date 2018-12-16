@@ -4,22 +4,22 @@
 (function () {
 
   // Мантия персонажа игрока
-  var coat = window.playerSettings.setup.querySelector('.wizard-coat');
+  var coat = window.setup.setup.querySelector('.wizard-coat');
 
   // Инпут с цветом мантии персонажа игрока, который отправляет цвет на сервер
-  var inputWizardCoat = window.playerSettings.setup.querySelector('input[name="coat-color"]');
+  var inputWizardCoat = window.setup.setup.querySelector('input[name="coat-color"]');
 
   // Цвет глаз персонажа игрока
-  var eyes = window.playerSettings.setup.querySelector('.wizard-eyes');
+  var eyes = window.setup.setup.querySelector('.wizard-eyes');
 
   // Инпут с цветом глаз персонажа игрока, который отправляет цвет на сервер
-  var inputWizardEyes = window.playerSettings.setup.querySelector('input[name="eyes-color"]');
+  var inputWizardEyes = window.setup.setup.querySelector('input[name="eyes-color"]');
 
   // Цвет фаербола персонажа игрока
-  var fireball = window.playerSettings.setup.querySelector('.setup-fireball-wrap');
+  var fireball = window.setup.setup.querySelector('.setup-fireball-wrap');
 
   // Инпут с цветом фаербола персонажа игрока, который отправляет цвет на сервер
-  var inputWizardFireball = window.playerSettings.setup.querySelector('input[name="fireball-color"]');
+  var inputWizardFireball = window.setup.setup.querySelector('input[name="fireball-color"]');
 
   // Меняет цвет мантии при клике на мантию персонажа игрока
   var onCoatClick = function () {
