@@ -42,24 +42,24 @@
   var playerSettings = document.querySelector('.setup-open-icon');
 
   // Окно с настройками игрока
-  var setupContainer = document.querySelector('.setup');
+  var setup = document.querySelector('.setup');
 
   // Инпут окна с именем игрока
-  var inputPlayerName = setupContainer.querySelector('.setup-user-name');
+  var inputPlayerName = setup.querySelector('.setup-user-name');
 
   // Иконка закрытия настроек игрока
-  var buttonClosePlayerSettings = setupContainer.querySelector('.setup-close');
+  var buttonClosePlayerSettings = setup.querySelector('.setup-close');
 
   // Кнопка отправки настроек игрока на сервер
-  var buttonSubmitPlayerSettings = setupContainer.querySelector('.setup-submit');
+  var buttonSubmitPlayerSettings = setup.querySelector('.setup-submit');
 
   // Форма с настройками персонажа игрока
   var formPlayerSettings = document.querySelector('.setup-wizard-form');
 
   // Изначальные координаты окна с настройками игрока относительно страницы
   var setupContainerPosition = {
-    x: setupContainer.offsetLeft,
-    y: setupContainer.offsetTop
+    x: setup.offsetLeft,
+    y: setup.offsetTop
   };
 
   // Удаляет обработчик события скрытия окна по нажатию Esc
@@ -74,12 +74,12 @@
 
   // Функция скрытия формы с настройками игрока
   var hidePlayerSettings = function () {
-    setupContainer.classList.add('hidden');
+    setup.classList.add('hidden');
     while (wizardsList.firstElementChild) {
       wizardsList.firstElementChild.remove();
     }
-    setupContainer.style.top = setupContainerPosition.y + 'px';
-    setupContainer.style.left = setupContainerPosition.x + 'px';
+    setup.style.top = setupContainerPosition.y + 'px';
+    setup.style.left = setupContainerPosition.x + 'px';
     document.removeEventListener('keydown', onDocumentKeydownEsc);
   };
 
@@ -117,7 +117,7 @@
 
   // Функция отображения формы с настройками игрока
   var showPlayerSettings = function () {
-    setupContainer.classList.remove('hidden');
+    setup.classList.remove('hidden');
     getSimilarWizards(getWizards());
     document.addEventListener('keydown', onDocumentKeydownEsc);
     // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
@@ -141,8 +141,8 @@
   // При клике на иконку игрока, открывается окно настроек игрока
   var onIconPlayerCLick = function () {
     showPlayerSettings();
-    setupContainerPosition.x = setupContainer.offsetLeft;
-    setupContainerPosition.y = setupContainer.offsetTop;
+    setupContainerPosition.x = setup.offsetLeft;
+    setupContainerPosition.y = setup.offsetTop;
   };
 
   // Показываем настройки игрока при клике на иконку игрока
@@ -152,7 +152,7 @@
   playerSettings.addEventListener('keydown', onIconPlayerKeydownEnter);
 
   window.setup = {
-    setup: setupContainer
+    setupContainer: setup
   };
 
 })();

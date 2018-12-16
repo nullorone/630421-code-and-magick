@@ -2,7 +2,6 @@
 
 (function () {
   var userAvatar = document.querySelector('.upload');
-  var setupContainer = document.querySelector('.setup');
 
   var onUserAvatarMousedown = function (evt) {
     evt.preventDefault();
@@ -27,8 +26,8 @@
         y: mousemoveEvt.clientY
       };
 
-      setupContainer.style.top = (setupContainer.offsetTop + newPosition.y) + 'px';
-      setupContainer.style.left = (setupContainer.offsetLeft + newPosition.x) + 'px';
+      window.setup.setupContainer.style.top = (window.setup.setupContainer.offsetTop + newPosition.y) + 'px';
+      window.setup.setupContainer.style.left = (window.setup.setupContainer.offsetLeft + newPosition.x) + 'px';
     };
 
     var onUserAvatarMouseup = function (mouseupEvt) {
