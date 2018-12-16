@@ -68,9 +68,10 @@ var getWizards = function () {
   return wizards;
 };
 
+var wizardsList = document.querySelector('.setup-similar-list');
+
 var getSimilarWizards = function (wizards) {
   var fragment = document.createDocumentFragment();
-  var wizardsList = document.querySelector('.setup-similar-list');
   var wizardTemplate = document
     .querySelector('#similar-wizard-template')
     .content.querySelector('.setup-similar-item');
@@ -87,8 +88,6 @@ var getSimilarWizards = function (wizards) {
   return wizardsList.appendChild(fragment);
 };
 
-getSimilarWizards(getWizards());
-
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
 
@@ -98,7 +97,7 @@ setupSimilar.classList.remove('hidden');
 var playerSettings = document.querySelector('.setup-open-icon');
 
 // Окно с настройками игрока
-var setupContainer = document.querySelector('.setup');
+var setupContainer = document.querySelector('.setup'); // Внешняя переменная Window
 
 // Инпут окна с именем игрока
 var inputPlayerName = setupContainer.querySelector('.setup-user-name');
@@ -131,6 +130,9 @@ var onPlayerSettingsKeydownEsc = function () {
 // Функция скрытия формы с настройками игрока
 var hidePlayerSettings = function () {
   setupContainer.classList.add('hidden');
+  while (wizardsList.firstElementChild) {
+    wizardsList.firstElementChild.remove();
+  }
   setupContainer.style.top = setupContainerPosition.y + 'px';
   setupContainer.style.left = setupContainerPosition.x + 'px';
   document.removeEventListener('keydown', onDocumentKeydownEsc);
@@ -210,6 +212,7 @@ var onWizardFireballClick = function () {
 // Функция отображения формы с настройками игрока
 var showPlayerSettings = function () {
   setupContainer.classList.remove('hidden');
+  getSimilarWizards(getWizards());
   document.addEventListener('keydown', onDocumentKeydownEsc);
   // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
   buttonClosePlayerSettings.addEventListener('click', onButtonCloseClick);
