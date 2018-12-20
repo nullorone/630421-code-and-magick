@@ -14,6 +14,7 @@
     var dragged = false;
 
     var onUserAvatarMousemove = function (mousemoveEvt) {
+      var setup = document.querySelector('.setup');
       mousemoveEvt.preventDefault();
       dragged = true;
       var newPosition = {
@@ -26,8 +27,8 @@
         y: mousemoveEvt.clientY
       };
 
-      window.setup.setupContainer.style.top = (window.setup.setupContainer.offsetTop + newPosition.y) + 'px';
-      window.setup.setupContainer.style.left = (window.setup.setupContainer.offsetLeft + newPosition.x) + 'px';
+      setup.style.top = (setup.offsetTop + newPosition.y) + 'px';
+      setup.style.left = (setup.offsetLeft + newPosition.x) + 'px';
     };
 
     var onUserAvatarMouseup = function (mouseupEvt) {

@@ -11,7 +11,7 @@
   };
 
   window.utils = {
-    randomIntegerInRange: getRandomInt,
+    getRandomInteger: getRandomInt,
     keydownEvent: isKeydownEvent
   };
 })();

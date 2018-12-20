@@ -1,19 +1,10 @@
 'use strict';
 
 (function () {
-  var getWizards = function () {
-    var wizards = [];
-    for (var i = 0; i < window.data.WIZARDS_NUMBER; i++) {
-      var wizardTemplate = {
-        'name': window.data.WIZARD_NAME[window.utils.randomIntegerInRange(0, window.data.WIZARD_NAME.length)] +
-          ' ' +
-          window.data.WIZARD_SURNAME[window.utils.randomIntegerInRange(0, window.data.WIZARD_SURNAME.length)],
-        'coatColor': window.data.WIZARD_COAT_COLOR[window.utils.randomIntegerInRange(0, window.data.WIZARD_COAT_COLOR.length)],
-        'eyesColor': window.data.WIZARD_EYES_COLOR[window.utils.randomIntegerInRange(0, window.data.WIZARD_EYES_COLOR.length)]
-      };
-      wizards.push(wizardTemplate);
-    }
-    return wizards;
+
+  var keyCodes = {
+    ENTER_KEYCODE: 13,
+    ESC_KEYCODE: 27
   };
 
   var wizardsList = document.querySelector('.setup-similar-list');
@@ -26,50 +17,38 @@
     for (var i = 0; i < wizards.length; i++) {
       var wizardElement = wizardTemplate.cloneNode(true);
       wizardElement.querySelector('.setup-similar-label').textContent =
-        wizards[i].name;
+      wizards[i].name;
       wizardElement.querySelector('.wizard-coat').style.fill =
-        wizards[i].coatColor;
+      wizards[i].coatColor;
       wizardElement.querySelector('.wizard-eyes').style.fill =
-        wizards[i].eyesColor;
+      wizards[i].eyesColor;
       fragment.appendChild(wizardElement);
     }
     return wizardsList.appendChild(fragment);
   };
 
+  // Блок с похожими персонажами
   var setupSimilar = document.querySelector('.setup-similar');
   setupSimilar.classList.remove('hidden');
-  // Иконка игрока на главной странице
-  var playerSettings = document.querySelector('.setup-open-icon');
 
   // Окно с настройками игрока
   var setup = document.querySelector('.setup');
 
-  // Инпут окна с именем игрока
-  var inputPlayerName = setup.querySelector('.setup-user-name');
-
-  // Иконка закрытия настроек игрока
-  var buttonClosePlayerSettings = setup.querySelector('.setup-close');
-
-  // Кнопка отправки настроек игрока на сервер
-  var buttonSubmitPlayerSettings = setup.querySelector('.setup-submit');
-
-  // Форма с настройками персонажа игрока
-  var formPlayerSettings = document.querySelector('.setup-wizard-form');
-
   // Изначальные координаты окна с настройками игрока относительно страницы
-  var setupContainerPosition = {
+  var setupPosition = {
     x: setup.offsetLeft,
     y: setup.offsetTop
   };
 
-  // Удаляет обработчик события скрытия окна по нажатию Esc
-  var onInputNameFocus = function () {
-    document.removeEventListener('keydown', onDocumentKeydownEsc);
-  };
-
-  // Добавляет обработчик события скрытия окна по нажатию Esc
-  var onPlayerSettingsKeydownEsc = function () {
-    document.addEventListener('keydown', onDocumentKeydownEsc);
+  // Функция отображения формы с настройками игрока
+  var showPlayerSettings = function () {
+    setup.classList.remove('hidden');
+    getSimilarWizards(window.data.getWizards());
+    document.addEventListener('keydown', onDocumentKeydown);
+    getButtonCloseListeners();
+    getFormPlayerSettingsListeners();
+    // Добавляет обработчики изменения цвета элементов мага игрока
+    window.data.change();
   };
 
   // Функция скрытия формы с настройками игрока
@@ -78,81 +57,96 @@
     while (wizardsList.firstElementChild) {
       wizardsList.firstElementChild.remove();
     }
-    setup.style.top = setupContainerPosition.y + 'px';
-    setup.style.left = setupContainerPosition.x + 'px';
-    document.removeEventListener('keydown', onDocumentKeydownEsc);
-  };
-
-  var onButtonCloseClick = function () {
-    hidePlayerSettings();
-  };
-
-  // Открывает настройками игрока при фокусе на иконку игрока и нажатии Enter
-  var onIconPlayerKeydownEnter = function (evt) {
-    if (window.utils.keydownEvent(evt, window.data.ENTER_KEYCODE)) {
-      showPlayerSettings();
-    }
-  };
-
-  // Скрывает настройками игрока при фокусе на иконку игрока и нажатии Enter
-  var onButtonCLoseKeydownEnter = function (evt) {
-    if (window.utils.keydownEvent(evt, window.data.ENTER_KEYCODE)) {
-      hidePlayerSettings();
-    }
+    setup.style.top = setupPosition.y + 'px';
+    setup.style.left = setupPosition.x + 'px';
+    document.removeEventListener('keydown', onDocumentKeydown);
   };
 
   // Добавляет класс hidden если был нажат Esc
-  var onDocumentKeydownEsc = function (evt) {
-    if (window.utils.keydownEvent(evt, window.data.ESC_KEYCODE)) {
+  var onDocumentKeydown = function (evt) {
+    if (window.utils.keydownEvent(evt, keyCodes.ESC_KEYCODE)) {
       hidePlayerSettings();
     }
   };
 
-  // Отправляет настройки игрока на сервер по нажатию на Enter
-  var onButtonSubmitKeydownEnter = function (evt) {
-    if (window.utils.keydownEvent(evt, window.data.ENTER_KEYCODE)) {
-      formPlayerSettings.submit();
-    }
+  var getIconPlayerListeners = function () {
+    // Иконка игрока на главной странице
+    var playerSettings = document.querySelector('.setup-open-icon');
+
+    // При клике на иконку игрока, открывается окно настроек игрока
+    var onIconPlayerCLick = function () {
+      showPlayerSettings();
+      setupPosition.x = setup.offsetLeft;
+      setupPosition.y = setup.offsetTop;
+    };
+
+    // Открывает настройками игрока при фокусе на иконку игрока и нажатии Enter
+    var onIconPlayerKeydown = function (evt) {
+      if (window.utils.keydownEvent(evt, keyCodes.ENTER_KEYCODE)) {
+        showPlayerSettings();
+      }
+    };
+
+    // Показываем настройки игрока при клике на иконку игрока
+    playerSettings.addEventListener('click', onIconPlayerCLick);
+    // Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
+    playerSettings.addEventListener('keydown', onIconPlayerKeydown);
   };
 
-  // Функция отображения формы с настройками игрока
-  var showPlayerSettings = function () {
-    setup.classList.remove('hidden');
-    getSimilarWizards(getWizards());
-    document.addEventListener('keydown', onDocumentKeydownEsc);
-    // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
-    buttonClosePlayerSettings.addEventListener('click', onButtonCloseClick);
-    // Закрывает окно при нажатии Enter на иконке закрытия окна
-    buttonClosePlayerSettings.addEventListener('keydown', onButtonCLoseKeydownEnter);
-    // Отправляет форму при нажатии Enter на кнопке Сохранить
-    buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitKeydownEnter);
+  // Инициализирует обработчики на иконке игрока
+  getIconPlayerListeners();
+
+  var getFormPlayerSettingsListeners = function () {
+    // Инпут окна с именем игрока
+    var inputPlayerName = setup.querySelector('.setup-user-name');
+    // Кнопка отправки настроек игрока на сервер
+    var buttonSubmitPlayerSettings = setup.querySelector('.setup-submit');
+
+    // Удаляет обработчик события скрытия окна по нажатию Esc
+    var onInputNameFocus = function () {
+      document.removeEventListener('keydown', onDocumentKeydown);
+    };
+
+    // Отправляет настройки игрока на сервер по нажатию на Enter
+    var onButtonSubmitKeydownEnter = function (evt) {
+      if (window.utils.keydownEvent(evt, keyCodes.ENTER_KEYCODE)) {
+        // Форма с настройками персонажа игрока
+        var formPlayerSettings = document.querySelector('.setup-wizard-form');
+        formPlayerSettings.submit();
+      }
+    };
+
+    // Добавляет обработчик события скрытия окна по нажатию Esc
+    var onPlayerSettingsKeydownEsc = function () {
+      document.addEventListener('keydown', onDocumentKeydown);
+    };
+
     // Отменяет закрытие окна с настройками игрока при фокусе на инпуте с именем игрока
     inputPlayerName.addEventListener('focus', onInputNameFocus);
     // Возвращает возможность закрытия окна по Esc, когда фокус уйдет с input
     inputPlayerName.addEventListener('blur', onPlayerSettingsKeydownEsc);
-    // При клике на глаза волшебника, меняется цвет глаз
-    window.changeUserWizard.wizardEyes.addEventListener('click', window.changeUserWizard.onWizardEyesClick);
-    // При клике на мантию, меняется цвет мантии
-    window.changeUserWizard.wizardCoat.addEventListener('click', window.changeUserWizard.onWizardCoatClick);
-    // При клике на фаербол, меняется цвет фаербола
-    window.changeUserWizard.wizardFireball.addEventListener('click', window.changeUserWizard.onWizardFireballClick);
+    // Отправляет форму при нажатии Enter на кнопке Сохранить
+    buttonSubmitPlayerSettings.addEventListener('keydown', onButtonSubmitKeydownEnter);
   };
 
-  // При клике на иконку игрока, открывается окно настроек игрока
-  var onIconPlayerCLick = function () {
-    showPlayerSettings();
-    setupContainerPosition.x = setup.offsetLeft;
-    setupContainerPosition.y = setup.offsetTop;
-  };
+  var getButtonCloseListeners = function () {
+    // Иконка закрытия настроек игрока
+    var buttonClosePlayerSettings = setup.querySelector('.setup-close');
+    var onButtonCloseClick = function () {
+      hidePlayerSettings();
+    };
 
-  // Показываем настройки игрока при клике на иконку игрока
-  playerSettings.addEventListener('click', onIconPlayerCLick);
+    // Скрывает настройками игрока при фокусе на иконку игрока и нажатии Enter
+    var onButtonCLoseKeydown = function (evt) {
+      if (window.utils.keydownEvent(evt, keyCodes.ENTER_KEYCODE)) {
+        hidePlayerSettings();
+      }
+    };
 
-  // Показываем настройки игрока при фокусе на иконке игрока и нажатии Enter
-  playerSettings.addEventListener('keydown', onIconPlayerKeydownEnter);
-
-  window.setup = {
-    setupContainer: setup
+    // Скрываем настройки игрока при клике на кнопку закрытия настроек игрока
+    buttonClosePlayerSettings.addEventListener('click', onButtonCloseClick);
+    // Закрывает окно при нажатии Enter на иконке закрытия окна
+    buttonClosePlayerSettings.addEventListener('keydown', onButtonCLoseKeydown);
   };
 
 })();
