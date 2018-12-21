@@ -8,8 +8,7 @@
 
   var generatedRandomValueElement = function (array, element) {
     var randomValueElement = array[window.utils.getRandomInteger(0, array.length - 1)];
-    randomValueElement = randomValueElement[element];
-    return randomValueElement;
+    return randomValueElement[element];
   };
 
   // Мантия персонажа игрока
