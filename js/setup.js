@@ -48,7 +48,7 @@
     getButtonCloseListeners();
     getFormPlayerSettingsListeners();
     // Добавляет обработчики изменения цвета элементов мага игрока
-    window.data.change();
+    window.changeUserWizard.getchangeWizardListeners();
   };
 
   // Функция скрытия формы с настройками игрока
