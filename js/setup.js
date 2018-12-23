@@ -7,6 +7,11 @@
     ESC_KEYCODE: 27
   };
 
+  // Форма с настройками персонажа игрока
+  var formPlayerSettings = document.querySelector('.setup-wizard-form');
+  // Кнопка submit формы настройки персонажа игрока
+  var buttonSubmitForm = document.querySelector('.setup-submit');
+  // Список похожих персонажей
   var wizardsList = document.querySelector('.setup-similar-list');
 
   var getSimilarWizards = function (wizards) {
@@ -42,6 +47,10 @@
 
   // Функция отображения формы с настройками игрока
   var showPlayerSettings = function () {
+    if (buttonSubmitForm.innerText !== 'Сохранить') {
+      buttonSubmitForm.disabled = false;
+      buttonSubmitForm.innerText = 'Сохранить';
+    }
     setup.classList.remove('hidden');
     getSimilarWizards(window.data.getWizards());
     document.addEventListener('keydown', onDocumentKeydown);
@@ -49,6 +58,7 @@
     getFormPlayerSettingsListeners();
     // Добавляет обработчики изменения цвета элементов мага игрока
     window.changeUserWizard.getchangeWizardListeners();
+    sendsFormData();
   };
 
   // Функция скрытия формы с настройками игрока
@@ -110,9 +120,7 @@
     // Отправляет настройки игрока на сервер по нажатию на Enter
     var onButtonSubmitKeydownEnter = function (evt) {
       if (window.utils.keydownEvent(evt, keyCodes.ENTER_KEYCODE)) {
-        // Форма с настройками персонажа игрока
-        var formPlayerSettings = document.querySelector('.setup-wizard-form');
-        formPlayerSettings.submit();
+        sendsFormData();
       }
     };
 
@@ -149,6 +157,18 @@
     buttonClosePlayerSettings.addEventListener('keydown', onButtonCLoseKeydown);
   };
 
+  var sendsFormData = function () {
+    // Отправляем данные формы на сервер
+    formPlayerSettings.addEventListener('submit', function (evt) {
+      var userData = new FormData(formPlayerSettings);
+      window.backend.save(userData);
+      evt.preventDefault();
+    });
+  };
+
+  window.setup = {
+    hidePlayerSettings: hidePlayerSettings
+  };
 })();
 
 
