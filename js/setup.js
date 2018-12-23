@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var WIZARDS_NUMBER = 4;
   var keyCodes = {
     ENTER_KEYCODE: 13,
     ESC_KEYCODE: 27
@@ -19,14 +19,15 @@
     var wizardTemplate = document
       .querySelector('#similar-wizard-template')
       .content.querySelector('.setup-similar-item');
-    for (var i = 0; i < wizards.length; i++) {
+    for (var i = 0; i < WIZARDS_NUMBER; i++) {
       var wizardElement = wizardTemplate.cloneNode(true);
+      var randomElementWizards = wizards[window.utils.getRandomInteger(0, wizards.length)];
       wizardElement.querySelector('.setup-similar-label').textContent =
-      wizards[i].name;
+      randomElementWizards.name;
       wizardElement.querySelector('.wizard-coat').style.fill =
-      wizards[i].coatColor;
+      randomElementWizards.colorCoat;
       wizardElement.querySelector('.wizard-eyes').style.fill =
-      wizards[i].eyesColor;
+      randomElementWizards.colorEyes;
       fragment.appendChild(wizardElement);
     }
     return wizardsList.appendChild(fragment);
@@ -49,10 +50,11 @@
   var showPlayerSettings = function () {
     if (buttonSubmitForm.innerText !== 'Сохранить') {
       buttonSubmitForm.disabled = false;
+      buttonSubmitForm.style.background = '#1cb34d';
       buttonSubmitForm.innerText = 'Сохранить';
     }
+    window.backend.load();
     setup.classList.remove('hidden');
-    getSimilarWizards(window.data.getWizards());
     document.addEventListener('keydown', onDocumentKeydown);
     getButtonCloseListeners();
     getFormPlayerSettingsListeners();
@@ -167,6 +169,7 @@
   };
 
   window.setup = {
+    getSimilarWizards: getSimilarWizards,
     hidePlayerSettings: hidePlayerSettings
   };
 })();
